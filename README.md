@@ -16,6 +16,7 @@ sudo pip install neospatial
 >>> from neospatial import *
 
 >>> spatial = SpatialConnection("localhost", 7474)
+>>> spatial.createLayer('geom')
 >>> index = spatial.createIndex('geom')
 
 >>> node1 = spatial.createNode(45.46775, 9.21056, {'name':'Gold Restaurant'})

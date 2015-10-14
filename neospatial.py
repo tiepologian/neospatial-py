@@ -9,6 +9,16 @@ class SpatialConnection:
         self.port = port
         return
 
+    def createLayer(self, name):
+        payload = { "layer":name, "lat":"lat", "lon":"lon" }
+        headers = {'content-type': 'application/json', 'accept': 'application/json'}
+        r = requests.post("http://"+self.hostname+":"+str(self.port)+"/db/data/ext/SpatialPlugin/graphdb/addSimplePointLayer", data=json.dumps(payload), headers=headers)
+        if r.status_code == 200 or r.status_code == 201:
+            return name
+        else:
+            raise Exception("Error Executing Query")
+
+
     def createIndex(self, name):
         payload = {"name":name, "config":{"provider":"spatial","geometry_type":"point","lat":"lat","lon":"lon"}}
         headers = {'content-type': 'application/json', 'accept': 'application/json'}
